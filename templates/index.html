@@ -25,20 +25,20 @@
             <h1 class="playfair-display-title">bettit.</h1>
             <p class="lede">The best bets pulled over millions of reddit posts.</p>
             <div class="hero__actions">
-                <span class="pill pill--ghost" id="comment-count">Loading…</span>
+                <span class="" id="comment-count"></span>
             </div>
         </div>
     </header>
 
     <main class="layout">
         <section class="panel">
-            <div class="panel__header">
-                <h2>Comments</h2>
-                <button class="refresh" id="refresh-btn" type="button">Refresh</button>
+            <div class="card-container">
+                <button class="nav-btn nav-btn--left" id="prev-btn" type="button">‹</button>
+                <div id="comments" class="single-card-view" aria-live="polite"></div>
+                <button class="nav-btn nav-btn--right" id="next-btn" type="button">›</button>
             </div>
-            <div id="comments" class="grid" aria-live="polite"></div>
-            <p id="empty" class="empty" hidden>No comments found in comments.json.</p>
-            <p id="error" class="error" hidden>Could not load comments. Try again.</p>
+            <p id="empty" class="empty" hidden>No picks available.</p>
+            <p id="error" class="error" hidden>Could not load picks.</p>
         </section>
     </main>
 

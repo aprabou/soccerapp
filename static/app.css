@@ -88,51 +88,89 @@ h1 {
 }
 
 .panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   padding: 20px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: none;
 }
 
-.panel__header {
+.card-container {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
+  justify-content: center;
+  min-height: 600px;
+  gap: 0;
 }
 
-.panel__header h2 {
-  margin: 0;
-  font-size: 18px;
+.single-card-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
-.refresh {
-  background: var(--accent);
-  color: #0f1115;
+.single-card-view .card {
+  width: 340px;
+  height: 520px;
+  max-width: none;
+  animation: slideIn 300ms ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+  background: transparent;
   border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.3);
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+  font-weight: 300;
   cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease;
-  box-shadow: 0 12px 30px rgba(255, 69, 0, 0.35);
+  transition: all 400ms ease;
+  opacity: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
 }
 
-.refresh:hover {
-  transform: translateY(-1px);
+.nav-btn:hover:not(:disabled) {
+  opacity: 50;
+  color: var(--accent);
+  transform: translateY(-50%) scale(1.2);
 }
 
-.refresh:active {
-  transform: translateY(1px);
+.nav-btn--left {
+  left: 0px;
+  font-size: 400px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+.nav-btn--right {
+  right: 0px;
+  font-size: 400px;
+}
+
+.nav-btn:disabled {
+  opacity: 0 !important;
+  cursor: not-allowed;
 }
 
 .card {
@@ -157,11 +195,11 @@ h1 {
 }
 
 .picks {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #fefefe;
-  padding: 12px;
+  padding: 16px;
   background: linear-gradient(90deg, rgba(255, 69, 0, 0.18), rgba(255, 255, 255, 0.03));
   border-left: 3px solid var(--accent);
   border-radius: 8px;
@@ -174,9 +212,9 @@ h1 {
   background: var(--surface-strong);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: all 120ms ease;
@@ -203,15 +241,26 @@ h1 {
 }
 
 .notes-content {
-  padding: 12px;
+  padding: 16px;
   background: var(--surface);
   border-radius: 8px;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.8;
   white-space: pre-wrap;
   position: relative;
   z-index: 1;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.notes-content .quote-author {
+  display: block;
+  text-align: right;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--accent);
 }
 
 .modal {
@@ -322,7 +371,7 @@ h1 {
 .meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 8px;
   position: relative;
   z-index: 1;
@@ -335,12 +384,14 @@ h1 {
 .votes {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 13px;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 12px;
+  width: fit-content;
 }
 
 .votes span {
@@ -401,12 +452,16 @@ body svg {
 }
 
 @media (max-width: 720px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .single-card-view .card {
+    width: 300px;
+    height: 480px;
   }
 
-  .panel__header {
-    flex-direction: column;
-    align-items: flex-start;
+  .nav-btn--left {
+    left: -50px;
+  }
+
+  .nav-btn--right {
+    right: -50px;
   }
 }

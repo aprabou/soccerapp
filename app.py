@@ -168,6 +168,124 @@ def extract_bet_segments(line: str) -> List[str]:
     return unique_segments
 
 
+def normalize_pick(pick_text: str) -> str:
+    """
+    Normalize a pick into a canonical form for grouping.
+    Handles team names and bet type aliases.
+    """
+    pick_lower = pick_text.lower().strip()
+    
+    # Bet type aliases
+    bet_type_map = {
+        'ml': 'moneyline',
+        'moneyline': 'moneyline',
+        'money line': 'moneyline',
+        'to win': 'moneyline',
+        'btts': 'both_teams_to_score',
+        'both teams to score': 'both_teams_to_score',
+        'dnb': 'draw_no_bet',
+        'draw no bet': 'draw_no_bet',
+        'ah': 'asian_handicap',
+        'asian handicap': 'asian_handicap',
+    }
+    
+    # Extract team name and bet type
+    team_name = None
+    bet_type = None
+    
+    # Try to find bet type first
+    for alias, canonical in bet_type_map.items():
+        if alias in pick_lower:
+            bet_type = canonical
+            # Remove bet type to isolate team name
+            team_name = pick_lower.replace(alias, '').strip()
+            # Remove common separators and odds
+            team_name = re.sub(r'[@\(\)\[\]:\-–,]', ' ', team_name)
+            team_name = re.sub(r'\d+\.?\d*\s*(?:odds)?', '', team_name)
+            team_name = '_'.join(team_name.split())
+            break
+    
+    # Handle Over/Under separately
+    if not bet_type:
+        over_under_match = re.search(r'(over|under)\s+([+\-]?[\d.]+)', pick_lower)
+        if over_under_match:
+            bet_type = over_under_match.group(1)
+            line = over_under_match.group(2)
+            return f"total:{bet_type}_{line}"
+    
+    if team_name and bet_type:
+        return f"{team_name}:{bet_type}"
+    
+    # Fallback: use the whole pick text normalized
+    return '_'.join(pick_lower.split())
+
+
+def aggregate_picks_by_votes(comments: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Treat each comment as a vote bundle. Each pick inherits the full upvote weight.
+    Aggregates by individual picks, not by comment groups.
+    """
+    from collections import defaultdict
+    
+    # Accumulator: pick_key -> {votes, contributors, original_texts, notes}
+    pick_data = defaultdict(lambda: {
+        'total_ups': 0,
+        'total_downs': 0,
+        'contributors': [],
+        'original_texts': set(),
+        'notes': []
+    })
+    
+    for comment in comments:
+        upvotes = comment.get('ups', 0)
+        downvotes = comment.get('downs', 0)
+        author = comment.get('author', 'Unknown')
+        notes = comment.get('notes', '')
+        
+        # Split picks by newline (each line is a separate pick)
+        individual_picks = [p.strip() for p in comment['picks'].split('\n') if p.strip()]
+        
+        for pick_text in individual_picks:
+            # Normalize the pick for grouping
+            pick_key = normalize_pick(pick_text)
+            
+            # Accumulate votes for this pick
+            pick_data[pick_key]['total_ups'] += upvotes
+            pick_data[pick_key]['total_downs'] += downvotes
+            pick_data[pick_key]['contributors'].append(author)
+            pick_data[pick_key]['original_texts'].add(pick_text)
+            
+            # Add notes with author attribution
+            if notes:
+                pick_data[pick_key]['notes'].append(f"**{author}:** {notes}")
+    
+    # Convert to list of cards
+    final_cards = []
+    for pick_key, data in pick_data.items():
+        # Use the most common original text for display
+        display_text = sorted(data['original_texts'], key=len)[0]  # Shortest version
+        
+        # Combine all notes
+        combined_notes = '\n\n---\n'.join(data['notes']) if data['notes'] else ''
+        
+        final_cards.append({
+            'id': pick_key,
+            'author': 'Community',
+            'picks': display_text,
+            'notes': combined_notes,
+            'ups': data['total_ups'],
+            'downs': data['total_downs'],
+            'contributors': data['contributors'],
+            'body': '',
+            'replies': []
+        })
+    
+    # Sort by total upvotes (descending)
+    final_cards.sort(key=lambda x: x['ups'], reverse=True)
+    
+    return final_cards
+
+
 def load_comments() -> List[Dict[str, Any]]:
     if not COMMENTS_PATH.exists():
         return []
@@ -181,7 +299,10 @@ def load_comments() -> List[Dict[str, Any]]:
     for listing in listings:
         comments.extend(_parse_listing(listing))
 
-    return comments
+    # Aggregate picks by votes (each pick inherits full upvote weight)
+    aggregated_picks = aggregate_picks_by_votes(comments)
+
+    return aggregated_picks
 
 
 @app.get("/")
@@ -212,7 +333,7 @@ def background_scraper():
             print(f"[Auto-scraper] Error: {e}")
         
         # Wait 2 minutes (120 seconds)
-        time.sleep(120)
+        time.sleep(300)
 
 
 if __name__ == "__main__":

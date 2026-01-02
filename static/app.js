@@ -1,8 +1,11 @@
 const commentsContainer = document.getElementById("comments");
 const emptyState = document.getElementById("empty");
 const errorState = document.getElementById("error");
-const countBadge = document.getElementById("comment-count");
-const refreshBtn = document.getElementById("refresh-btn");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+let allComments = [];
+let currentIndex = 0;
 
 async function fetchComments() {
   try {
@@ -27,57 +30,61 @@ function toggleState({ loading = false, error = false }) {
   emptyState.hidden = true;
 
   if (loading) {
-    countBadge.textContent = "Loading…";
-    refreshBtn.disabled = true;
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
     return;
   }
-
-  refreshBtn.disabled = false;
 }
 
 function renderComments(comments) {
-  commentsContainer.innerHTML = "";
+  allComments = comments;
+  currentIndex = 0;
 
   if (!comments.length) {
     emptyState.hidden = false;
-    countBadge.textContent = "0 comments";
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
     return;
   }
 
   emptyState.hidden = true;
   errorState.hidden = true;
-  countBadge.textContent = `${comments.length} top-level`;
 
-  const fragment = document.createDocumentFragment();
-  comments.forEach((comment) => {
-    fragment.appendChild(createCommentCard(comment));
-  });
+  showCurrentCard();
+}
 
-  commentsContainer.appendChild(fragment);
+function showCurrentCard() {
+  commentsContainer.innerHTML = "";
+  
+  if (allComments.length === 0) return;
+
+  const comment = allComments[currentIndex];
+  const card = createCommentCard(comment);
+  commentsContainer.appendChild(card);
+
+  // Update button states
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex === allComments.length - 1;
+}
+
+function showNextCard() {
+  if (currentIndex < allComments.length - 1) {
+    currentIndex++;
+    showCurrentCard();
+  }
+}
+
+function showPrevCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    showCurrentCard();
+  }
 }
 
 function createCommentCard(comment, depth = 0) {
   const card = document.createElement("article");
   card.className = "card";
   card.style.setProperty("--depth", depth);
-
-  const meta = document.createElement("div");
-  meta.className = "meta";
-
-  const author = document.createElement("div");
-  author.className = "author";
-  author.textContent = comment.author;
-
-  const votes = document.createElement("div");
-  votes.className = "votes";
-  votes.innerHTML = `
-    <span title="Upvotes">▲ ${comment.ups ?? 0}</span>
-    <span title="Downvotes">▼ ${comment.downs ?? 0}</span>
-  `;
-
-  meta.appendChild(author);
-  meta.appendChild(votes);
-  card.appendChild(meta);
 
   // Display picks prominently
   if (comment.picks) {
@@ -87,17 +94,45 @@ function createCommentCard(comment, depth = 0) {
     card.appendChild(picks);
   }
 
+  // Votes under picks
+  const votes = document.createElement("div");
+  votes.className = "votes";
+  votes.innerHTML = `
+    <span title="Upvotes">▲ ${comment.ups ?? 0}</span>
+    <span title="Downvotes">▼ ${comment.downs ?? 0}</span>
+  `;
+  card.appendChild(votes);
+
   // Collapsible notes section
   if (comment.notes) {
     const notesToggle = document.createElement("button");
     notesToggle.className = "toggle-btn";
-    notesToggle.textContent = "📝 View Analysis";
+    notesToggle.textContent = "� View Analysis";
     notesToggle.type = "button";
 
     const notesContent = document.createElement("div");
     notesContent.className = "notes-content";
     notesContent.hidden = true;
-    notesContent.textContent = comment.notes;
+    
+    // Format notes as quotes with author attribution
+    // Extract top 1-2 comments from the notes
+    const notesSections = comment.notes.split(/---+/).filter(s => s.trim());
+    const topComments = notesSections.slice(0, 2);
+    
+    topComments.forEach((section, idx) => {
+      const authorMatch = section.match(/\*\*(.+?):\*\*/);
+      if (authorMatch) {
+        const author = authorMatch[1];
+        const text = section.replace(/\*\*(.+?):\*\*/, '').trim();
+        
+        if (text) {
+          const quoteDiv = document.createElement('div');
+          quoteDiv.style.marginBottom = idx < topComments.length - 1 ? '16px' : '0';
+          quoteDiv.innerHTML = `"${text}"<span class="quote-author">— ${author}</span>`;
+          notesContent.appendChild(quoteDiv);
+        }
+      }
+    });
 
     notesToggle.addEventListener("click", () => {
       notesContent.hidden = !notesContent.hidden;
@@ -106,20 +141,6 @@ function createCommentCard(comment, depth = 0) {
 
     card.appendChild(notesToggle);
     card.appendChild(notesContent);
-  }
-
-  // Replies button with modal
-  if (comment.replies && comment.replies.length) {
-    const repliesBtn = document.createElement("button");
-    repliesBtn.className = "toggle-btn replies-btn";
-    repliesBtn.textContent = `💬 View ${comment.replies.length} ${comment.replies.length === 1 ? 'Reply' : 'Replies'}`;
-    repliesBtn.type = "button";
-
-    repliesBtn.addEventListener("click", () => {
-      showRepliesModal(comment.replies, comment.author);
-    });
-
-    card.appendChild(repliesBtn);
   }
 
   return card;
@@ -187,7 +208,14 @@ function createReplyCard(reply) {
   return replyCard;
 }
 
-refreshBtn.addEventListener("click", fetchComments);
+prevBtn.addEventListener("click", showPrevCard);
+nextBtn.addEventListener("click", showNextCard);
+
+// Keyboard navigation
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") showPrevCard();
+  if (e.key === "ArrowRight") showNextCard();
+});
 
 // Auto-refresh every 2 minutes (120000 ms)
 setInterval(fetchComments, 120000);

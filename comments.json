@@ -101,7 +101,7 @@
                         "report_reasons": null,
                         "author": "valerian92",
                         "discussion_type": null,
-                        "num_comments": 30,
+                        "num_comments": 32,
                         "send_replies": true,
                         "media": null,
                         "contest_mode": false,
@@ -110,7 +110,7 @@
                         "permalink": "/r/SoccerBetting/comments/1q19f1t/daily_picks_thread_friday_2nd_january_2026/",
                         "stickied": false,
                         "url": "https://www.reddit.com/r/SoccerBetting/comments/1q19f1t/daily_picks_thread_friday_2nd_january_2026/",
-                        "subreddit_subscribers": 129351,
+                        "subreddit_subscribers": 129352,
                         "created_utc": 1767288036.0,
                         "num_crossposts": 0,
                         "mod_reports": [],
@@ -182,7 +182,7 @@
                                             "created_utc": 1767331039.0,
                                             "send_replies": true,
                                             "parent_id": "t1_nx69ux4",
-                                            "score": 9,
+                                            "score": 12,
                                             "author_fullname": "t2_u8updvl",
                                             "removal_reason": null,
                                             "approved_by": null,
@@ -224,7 +224,7 @@
                                             "collapsed_because_crowd_control": null,
                                             "mod_reports": [],
                                             "num_reports": null,
-                                            "ups": 9
+                                            "ups": 12
                                         }
                                     },
                                     {
@@ -251,13 +251,13 @@
                                             "gilded": 0,
                                             "archived": false,
                                             "collapsed_reason_code": null,
-                                            "no_follow": true,
+                                            "no_follow": false,
                                             "author": "animalplaneteune",
                                             "can_mod_post": false,
                                             "created_utc": 1767334237.0,
                                             "send_replies": true,
                                             "parent_id": "t1_nx69ux4",
-                                            "score": 3,
+                                            "score": 5,
                                             "author_fullname": "t2_7eg7kapf",
                                             "removal_reason": null,
                                             "approved_by": null,
@@ -299,7 +299,7 @@
                                             "collapsed_because_crowd_control": null,
                                             "mod_reports": [],
                                             "num_reports": null,
-                                            "ups": 3
+                                            "ups": 5
                                         }
                                     },
                                     {
@@ -332,7 +332,7 @@
                                             "created_utc": 1767334582.0,
                                             "send_replies": true,
                                             "parent_id": "t1_nx69ux4",
-                                            "score": 2,
+                                            "score": 3,
                                             "author_fullname": "t2_2ru4zouk",
                                             "removal_reason": null,
                                             "approved_by": null,
@@ -374,7 +374,7 @@
                                             "collapsed_because_crowd_control": null,
                                             "mod_reports": [],
                                             "num_reports": null,
-                                            "ups": 2
+                                            "ups": 3
                                         }
                                     }
                                 ],
@@ -395,7 +395,7 @@
                         "created_utc": 1767315480.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 25,
+                        "score": 26,
                         "author_fullname": "t2_1ov903s6",
                         "approved_by": null,
                         "mod_note": null,
@@ -437,7 +437,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 25
+                        "ups": 26
                     }
                 },
                 {
@@ -579,7 +579,7 @@
                                             "created_utc": 1767292368.0,
                                             "send_replies": true,
                                             "parent_id": "t1_nx46bng",
-                                            "score": 3,
+                                            "score": 2,
                                             "author_fullname": "t2_22jgfurk80",
                                             "removal_reason": null,
                                             "approved_by": null,
@@ -621,7 +621,82 @@
                                             "collapsed_because_crowd_control": null,
                                             "mod_reports": [],
                                             "num_reports": null,
-                                            "ups": 3
+                                            "ups": 2
+                                        }
+                                    },
+                                    {
+                                        "kind": "t1",
+                                        "data": {
+                                            "subreddit_id": "t5_2r4wz",
+                                            "approved_at_utc": null,
+                                            "author_is_blocked": false,
+                                            "comment_type": null,
+                                            "awarders": [],
+                                            "mod_reason_by": null,
+                                            "banned_by": null,
+                                            "author_flair_type": "text",
+                                            "total_awards_received": 0,
+                                            "subreddit": "SoccerBetting",
+                                            "author_flair_template_id": null,
+                                            "likes": null,
+                                            "replies": "",
+                                            "user_reports": [],
+                                            "saved": false,
+                                            "id": "nx9555w",
+                                            "banned_at_utc": null,
+                                            "mod_reason_title": null,
+                                            "gilded": 0,
+                                            "archived": false,
+                                            "collapsed_reason_code": null,
+                                            "no_follow": true,
+                                            "author": "BoyHarsherrr",
+                                            "can_mod_post": false,
+                                            "created_utc": 1767362250.0,
+                                            "send_replies": true,
+                                            "parent_id": "t1_nx46bng",
+                                            "score": 1,
+                                            "author_fullname": "t2_sqmnual9s",
+                                            "removal_reason": null,
+                                            "approved_by": null,
+                                            "mod_note": null,
+                                            "all_awardings": [],
+                                            "body": "I also like Villa ML, thoughts on Brentford ML vs Everton? 3,10 odds",
+                                            "edited": false,
+                                            "top_awarded_type": null,
+                                            "author_flair_css_class": null,
+                                            "name": "t1_nx9555w",
+                                            "is_submitter": false,
+                                            "downs": 0,
+                                            "author_flair_richtext": [],
+                                            "author_patreon_flair": false,
+                                            "body_html": "&lt;div class=\"md\"&gt;&lt;p&gt;I also like Villa ML, thoughts on Brentford ML vs Everton? 3,10 odds&lt;/p&gt;\n&lt;/div&gt;",
+                                            "gildings": {},
+                                            "collapsed_reason": null,
+                                            "distinguished": null,
+                                            "associated_award": null,
+                                            "stickied": false,
+                                            "author_premium": false,
+                                            "can_gild": false,
+                                            "link_id": "t3_1q19f1t",
+                                            "unrepliable_reason": null,
+                                            "author_flair_text_color": null,
+                                            "score_hidden": false,
+                                            "permalink": "/r/SoccerBetting/comments/1q19f1t/daily_picks_thread_friday_2nd_january_2026/nx9555w/",
+                                            "subreddit_type": "public",
+                                            "locked": false,
+                                            "report_reasons": null,
+                                            "created": 1767362250.0,
+                                            "author_flair_text": null,
+                                            "treatment_tags": [],
+                                            "collapsed": false,
+                                            "subreddit_name_prefixed": "r/SoccerBetting",
+                                            "controversiality": 0,
+                                            "depth": 1,
+                                            "author_flair_background_color": null,
+                                            "collapsed_because_crowd_control": null,
+                                            "mod_reports": [],
+                                            "num_reports": null,
+                                            "ups": 1
                                         }
                                     }
                                 ],
@@ -642,7 +717,7 @@
                         "created_utc": 1767291612.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 5,
+                        "score": 6,
                         "author_fullname": "t2_alxtk3t1",
                         "approved_by": null,
                         "mod_note": null,
@@ -684,7 +759,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 5
+                        "ups": 6
                     }
                 },
                 {
@@ -717,7 +792,7 @@
                         "created_utc": 1767308356.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 5,
+                        "score": 4,
                         "author_fullname": "t2_11akiy8b4d",
                         "approved_by": null,
                         "mod_note": null,
@@ -759,7 +834,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 5
+                        "ups": 4
                     }
                 },
                 {
@@ -792,7 +867,7 @@
                         "created_utc": 1767311917.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 6,
+                        "score": 7,
                         "author_fullname": "t2_rq0ng04sq",
                         "approved_by": null,
                         "mod_note": null,
@@ -834,7 +909,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 6
+                        "ups": 7
                     }
                 },
                 {
@@ -953,7 +1028,7 @@
                         "created_utc": 1767292226.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 20,
+                        "score": 18,
                         "author_fullname": "t2_22jgfurk80",
                         "approved_by": null,
                         "mod_note": null,
@@ -995,7 +1070,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 20
+                        "ups": 18
                     }
                 },
                 {
@@ -1051,7 +1126,7 @@
                                             "created_utc": 1767354822.0,
                                             "send_replies": true,
                                             "parent_id": "t1_nx8igjp",
-                                            "score": 1,
+                                            "score": 3,
                                             "author_fullname": "t2_2ap7zp9w",
                                             "removal_reason": null,
                                             "approved_by": null,
@@ -1093,7 +1168,7 @@
                                             "collapsed_because_crowd_control": null,
                                             "mod_reports": [],
                                             "num_reports": null,
-                                            "ups": 1
+                                            "ups": 3
                                         }
                                     }
                                 ],
@@ -1183,13 +1258,13 @@
                         "gilded": 0,
                         "archived": false,
                         "collapsed_reason_code": null,
-                        "no_follow": true,
+                        "no_follow": false,
                         "author": "Key-Question5472",
                         "can_mod_post": false,
                         "created_utc": 1767334755.0,
                         "send_replies": true,
                         "parent_id": "t3_1q19f1t",
-                        "score": 2,
+                        "score": 4,
                         "author_fullname": "t2_cy6d6i90t",
                         "approved_by": null,
                         "mod_note": null,
@@ -1231,7 +1306,7 @@
                         "collapsed_because_crowd_control": null,
                         "mod_reports": [],
                         "num_reports": null,
-                        "ups": 2
+                        "ups": 4
                     }
                 },
                 {
