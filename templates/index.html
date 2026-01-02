@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bettit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    .playfair-display-title {
+      font-family: "Playfair Display", serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: italic;
+    }
+    </style>
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__content">
+            <h1 class="playfair-display-title">bettit.</h1>
+            <p class="lede">The best bets pulled over millions of reddit posts.</p>
+            <div class="hero__actions">
+                <span class="pill pill--ghost" id="comment-count">Loading…</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="panel">
+            <div class="panel__header">
+                <h2>Comments</h2>
+                <button class="refresh" id="refresh-btn" type="button">Refresh</button>
+            </div>
+            <div id="comments" class="grid" aria-live="polite"></div>
+            <p id="empty" class="empty" hidden>No comments found in comments.json.</p>
+            <p id="error" class="error" hidden>Could not load comments. Try again.</p>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
